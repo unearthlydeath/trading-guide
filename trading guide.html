@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trading Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --card: #13131c;
+      --border: #1e1e2e;
+      --accent1: #f5c842;
+      --accent2: #ff5e5e;
+      --accent3: #4ee8b4;
+      --accent4: #7c6fff;
+      --text: #f0f0f5;
+      --muted: #888899;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── PAGES ─── */
+    .page { display: none; min-height: 100vh; flex-direction: column; }
+    .page.active { display: flex; animation: fadeIn .4s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+
+    /* ─── LANDING ─── */
+    #page-home {
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(124,111,255,.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(245,200,66,.15) 0%, transparent 55%),
+        var(--bg);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .landing-badge {
+      display: inline-block;
+      background: rgba(245,200,66,.12);
+      border: 1px solid rgba(245,200,66,.3);
+      color: var(--accent1);
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 28px;
+    }
+
+    .landing-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.03em;
+      margin-bottom: 12px;
+    }
+
+    .landing-title .highlight {
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .landing-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    .chapters-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .chapter-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .chapter-card.c1::before { background: linear-gradient(90deg, var(--accent1), var(--accent2)); }
+    .chapter-card.c2::before { background: linear-gradient(90deg, var(--accent3), var(--accent4)); }
+    .chapter-card.c3::before { background: linear-gradient(90deg, var(--accent2), var(--accent4)); }
+    .chapter-card.c4::before { background: linear-gradient(90deg, var(--accent4), var(--accent1)); }
+    .chapter-card.c5::before { background: linear-gradient(90deg, var(--accent1), var(--accent3)); }
+
+    .chapter-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,.15);
+      box-shadow: 0 20px 40px rgba(0,0,0,.4);
+    }
+
+    .card-icon { font-size: 2rem; margin-bottom: 10px; }
+    .card-num {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .card-desc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+    .start-btn {
+      margin-top: 40px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      color: #000;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      letter-spacing: .03em;
+    }
+    .start-btn:hover { transform: scale(1.04); box-shadow: 0 8px 30px rgba(245,200,66,.35); }
+
+    /* ─── INNER PAGES ─── */
+    .inner-page {
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,15,.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .topbar-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .topbar-progress {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .progress-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .progress-dot.done { background: var(--accent3); }
+    .progress-dot.current { background: var(--accent1); transform: scale(1.4); }
+    .topbar-home-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .82rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .topbar-home-btn:hover { border-color: var(--accent1); color: var(--accent1); }
+
+    /* Content area */
+    .content-wrap {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 56px 32px;
+    }
+
+    .chapter-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent1);
+      margin-bottom: 16px;
+    }
+    .chapter-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent1); }
+
+    .content-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.025em;
+      margin-bottom: 32px;
+    }
+
+    /* Image placeholder */
+    .img-block {
+      width: 100%;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin: 32px 0;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .img-block img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .img-placeholder {
+      width: 100%;
+      min-height: 280px;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .9rem;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+    }
+    .img-placeholder .ph-icon { font-size: 2.5rem; }
+
+    /* Callout box */
+    .callout {
+      background: var(--card);
+      border-left: 3px solid var(--accent3);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+      font-size: .95rem;
+      line-height: 1.65;
+      color: #d0d0e0;
+    }
+    .callout.warn { border-color: var(--accent2); }
+    .callout.tip  { border-color: var(--accent4); }
+    .callout-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      margin-bottom: 6px;
+    }
+    .callout.warn .callout-label { color: var(--accent2); }
+    .callout.tip  .callout-label { color: var(--accent4); }
+
+    /* Body text */
+    .body-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #c8c8d8;
+      margin-bottom: 20px;
+    }
+
+    /* Key terms */
+    .key-term {
+      background: rgba(124,111,255,.12);
+      border: 1px solid rgba(124,111,255,.25);
+      color: var(--accent4);
+      border-radius: 6px;
+      padding: 1px 7px;
+      font-size: .9em;
+      font-weight: 600;
+    }
+
+    /* Highlight cards */
+    .highlight-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 28px 0;
+    }
+    .hl-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+    .hl-card .hl-icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .hl-card .hl-title { font-family: 'Syne', sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+    .hl-card .hl-desc { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── NAV BUTTONS ─── */
+    .nav-strip {
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 22px;
+      cursor: pointer;
+      transition: border-color .2s, transform .15s, box-shadow .2s;
+      min-width: 180px;
+      color: var(--text);
+      text-align: left;
+    }
+    .nav-btn:hover {
+      border-color: var(--accent1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,200,66,.12);
+    }
+    .nav-btn.next { text-align: right; }
+    .nav-btn .nav-label {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-btn .nav-topic {
+      font-family: 'Syne', sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+    }
+    .nav-btn .nav-arrow {
+      font-size: 1.1rem;
+      color: var(--accent1);
+    }
+    .nav-btn.prev .nav-arrow { margin-right: 4px; }
+    .nav-btn.next .nav-arrow { margin-left: 4px; }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    @media (max-width: 600px) {
+      .content-wrap { padding: 32px 20px; }
+      .topbar { padding: 14px 20px; }
+      .nav-strip { padding: 20px; }
+      .nav-btn { min-width: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ LANDING PAGE ═══════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="landing-badge">📈 Tiana's Trading Guide</div>
+  <h1 class="landing-title">
+    Learn My<br><span class="highlight">Trading Knowledge</span>
+  </h1>
+  <p class="landing-subtitle">
+    Your step-by-step guide to understanding trading from whatever Tiana knows and what the professionals corrected/added on.
+  </p>
+
+  <div class="chapters-grid">
+    <div class="chapter-card c1" onclick="goToPage('page-1')">
+      <div class="card-icon">📊</div>
+      <div class="card-num">Chapter 01</div>
+      <div class="card-title">Intro to Trading</div>
+      <div class="card-desc">What trading is, how markets work, and the key players involved.</div>
+    </div>
+    <div class="chapter-card c2" onclick="goToPage('page-2')">
+      <div class="card-icon">🕯️</div>
+      <div class="card-num">Chapter 02</div>
+      <div class="card-title">Reading Charts</div>
+      <div class="card-desc">Candlesticks, trends, support & resistance — chart reading made simple.</div>
+    </div>
+    <div class="chapter-card c3" onclick="goToPage('page-3')">
+      <div class="card-icon">🛡️</div>
+      <div class="card-num">Chapter 03</div>
+      <div class="card-title">Risk Management</div>
+      <div class="card-desc">Protect your capital with proven risk management rules.</div>
+    </div>
+    <div class="chapter-card c4" onclick="goToPage('page-4')">
+      <div class="card-icon">🧠</div>
+      <div class="card-num">Chapter 04</div>
+      <div class="card-title">Trading Psychology</div>
+      <div class="card-desc">Control emotions, manage fear & greed, and trade with a clear mind.</div>
+    </div>
+    <div class="chapter-card c5" onclick="goToPage('page-5')">
+      <div class="card-icon">⚡</div>
+      <div class="card-num">Chapter 05</div>
+      <div class="card-title">Your First Trade</div>
+      <div class="card-desc">A walkthrough of placing your first trade from start to finish.</div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="goToPage('page-1')">Start from Chapter 1 →</button>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 1 ═══════════════════════════ -->
+<div id="page-1" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-1"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 01</div>
+    <h1 class="content-title">Intro to Trading</h1>
+
+    <p class="body-text">
+      Trading is the buying and selling of financial assets — like stocks, forex, crypto, or commodities — with the goal of making a profit. Unlike long-term investing, trading often involves shorter timeframes and more active decision-making.
+    </p>
+
+    <div class="img-block">
+      <img src="gold chart.png" alt="Market overview chart" />
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">📌 Key Concept</div>
+      A <span class="key-term">market</span> is any place (physical or digital) where buyers and sellers come together to exchange assets. Understanding how markets move is the foundation of all trading.
+    </div>
+
+    <p class="body-text">
+      There are many types of markets you can trade in. The most popular include the <span class="key-term">stock market</span>, the <span class="key-term">forex market</span>, <span class="key-term">crypto</span>, and <span class="key-term">commodities</span> like gold and oil. Each has its own hours, risks, and opportunities.
+    </p>
+  
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">📉</div>
+        <div class="hl-title">Bear Market</div>
+        <div class="hl-desc">Prices are falling broadly — sellers outnumber buyers.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">📈</div>
+        <div class="hl-title">Bull Market</div>
+        <div class="hl-desc">Prices are rising broadly — buyers are in control.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🔄</div>
+        <div class="hl-title">Sideways Market</div>
+        <div class="hl-desc">No clear direction — price moves within a sideways range.</div>
+      </div>
+    </div>
+
+    <!---<p class="body-text">
+      Add more of your own text and images here. You can copy the <code class="key-term">.img-block</code>, <code class="key-term">.callout</code>, and <code class="key-term">.body-text</code> elements anywhere in this section.
+    </p>/!-->
+
+    <p class="body-text">
+      To start trading we need a broker. Many Jamaicans use Deriv as their chosen broker but some may use Exness or any other broker. It all depends on what/when you want to trade.
+    </p>
+    <div class="img-block">
+      <img src="trading hub.png" alt="Picture of Deriv's demo trading hub" />
+      <p> Image of Deriv's Trading Hub </p>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-label">⚠️ Warning</div>
+      Trading involves real risk. Never trade with money you cannot afford to lose. Always do your own research before entering any position.
+    </div>
+  </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-home')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Home</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-2')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Reading Charts</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 2 ═══════════════════════════ -->
+<div id="page-2" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-2"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 02</div>
+    <h1 class="content-title">Reading Charts</h1>
+
+    <p class="body-text">
+      Charts are the primary tool a trader uses to analyse price action. The most popular chart type is the <span class="key-term">candlestick chart</span>, which shows four key data points for each time period: the Open, High, Low, and Close (OHLC).
+    </p>
+
+    <div class="img-block">
+      <img src="candle-anatomy.jpg">
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">💡 Tip</div>
+      A <span class="key-term">green (bullish) candle</span> closes higher than it opened. A <span class="key-term">red (bearish) candle</span> closes lower. Learning to read these patterns quickly is a core skill every trader needs.
+    </div>
+
+    <p class="body-text">
+      Replace this text with your own content about chart patterns, indicators, moving averages, or anything else you want to cover in this chapter. You can add as many paragraphs, images, and callout boxes as you like.
+    </p>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">📐</div>
+        <div class="hl-title">Support</div>
+        <div class="hl-desc">A price level where buyers tend to step in and stop the fall.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🔒</div>
+        <div class="hl-title">Resistance</div>
+        <div class="hl-desc">A price level where sellers tend to step in and stop the rise.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">📏</div>
+        <div class="hl-title">Trend Line</div>
+        <div class="hl-desc">A line drawn connecting a series of highs or lows to show trend direction.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-1')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Intro to Trading</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-3')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Risk Management</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 3 ═══════════════════════════ -->
+<div id="page-3" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-3"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+  <!--
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 03</div>
+    <h1 class="content-title">Risk Management</h1>
+
+    
+    <p class="body-text">
+      Risk management is arguably the most important skill in trading. Even the best strategy will fail if you don't protect your capital. The golden rule: never risk more than you can afford to lose on a single trade.
+    </p>
+
+    <div class="img-block">
+      <div class="img-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <div>Add your risk management diagram or chart here</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-label">⚠️ Rule #1</div>
+      Most professional traders risk no more than <strong style="color:var(--accent2)">1–2%</strong> of their total account on any single trade. This keeps losses manageable even during losing streaks.
+    </div>
+
+    <p class="body-text">
+      Add your own content here — stop losses, take profits, position sizing, risk/reward ratios, etc. Use the highlight cards below for quick reference points.
+    </p>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">🛑</div>
+        <div class="hl-title">Stop Loss</div>
+        <div class="hl-desc">An order that automatically closes your trade at a set loss level.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🎯</div>
+        <div class="hl-title">Take Profit</div>
+        <div class="hl-desc">An order that locks in gains when price hits your target.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">⚖️</div>
+        <div class="hl-title">Risk/Reward</div>
+        <div class="hl-desc">Compare potential loss to potential gain. Aim for at least 1:2.</div>
+      </div>
+    </div>
+  </div>
+        -->
+
+        <div class="callout warn">
+          <div class="callout-label">Whoops not ready yet</div>
+        </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-2')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Reading Charts</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-4')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Trading Psychology</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 4 ═══════════════════════════ -->
+<div id="page-4" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-4"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <!--
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 04</div>
+    <h1 class="content-title">Trading Psychology</h1>
+
+    <p class="body-text">
+      The market is a battlefield of emotions. Fear causes traders to exit too early; greed causes them to hold too long. Developing the right mindset is just as important as any technical skill.
+    </p>
+
+    <div class="img-block">
+      <div class="img-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <div>Add your psychology diagram or image here</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">💡 Mindset Tip</div>
+      Keep a <span class="key-term">trading journal</span>. Writing down every trade — your reason for entering, your emotions, and the outcome — is one of the fastest ways to improve your decision-making.
+    </div>
+
+    <p class="body-text">
+      Replace this with your own content about discipline, emotional control, revenge trading, FOMO, and developing a consistent routine. Add more paragraphs and images as needed.
+    </p>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">😱</div>
+        <div class="hl-title">Fear</div>
+        <div class="hl-desc">Leads to premature exits and missed opportunities.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🤑</div>
+        <div class="hl-title">Greed</div>
+        <div class="hl-desc">Leads to overtrading and holding losing positions too long.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🧘</div>
+        <div class="hl-title">Discipline</div>
+        <div class="hl-desc">Sticking to your plan no matter what the market throws at you.</div>
+      </div>
+    </div>
+  </div>
+      -->
+      <div class="callout warn">
+        <div class="callout-label">Whoops not ready yet</div>
+      </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-3')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Risk Management</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-5')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Your First Trade</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 5 ═══════════════════════════ -->
+<div id="page-5" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-5"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <!--
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 05</div>
+    <h1 class="content-title">Your First Trade</h1>
+
+    <p class="body-text">
+      You've learned the theory — now it's time to put it into practice. This chapter walks you through placing your very first trade, step by step, so you know exactly what to expect.
+    </p>
+
+    <div class="img-block">
+      <div class="img-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <div>Add a screenshot of your platform or trade setup here</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">✅ Before You Trade</div>
+      Always use a <span class="key-term">demo account</span> first. Practice with virtual money until you are consistently profitable before risking real capital.
+    </div>
+
+    <p class="body-text">
+      Replace this with your step-by-step walkthrough. You can add numbered steps, screenshots, tips, and warnings using the elements already provided in this template.
+    </p>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">1️⃣</div>
+        <div class="hl-title">Choose an Asset</div>
+        <div class="hl-desc">Pick a market you understand and have researched.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">2️⃣</div>
+        <div class="hl-title">Set Your Levels</div>
+        <div class="hl-desc">Define your entry, stop loss, and take profit before you click buy.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">3️⃣</div>
+        <div class="hl-title">Execute & Monitor</div>
+        <div class="hl-desc">Place the trade and manage it according to your plan.</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">🎉 You Made It!</div>
+      Congratulations — you've reached the end of the guide. Keep studying, keep practising, and remember: consistency beats perfection every single time.
+    </div>
+  </div>
+
+    -->
+    <div class="callout warn">
+      <div class="callout-label">Whoops not ready yet</div>
+    </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-4')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Trading Psychology</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-home')">
+      <span class="nav-label">Back to <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Home</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SCRIPT ═══════════════════════════ -->
+<script>
+  const PAGES = ['page-home', 'page-1', 'page-2', 'page-3', 'page-4', 'page-5'];
+  const CHAPTER_COUNT = 5;
+  let visited = new Set(['page-home']);
+
+  function goToPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo(0, 0);
+      visited.add(id);
+      updateProgress(id);
+    }
+  }
+
+  function updateProgress(currentId) {
+    for (let i = 1; i <= CHAPTER_COUNT; i++) {
+      const el = document.getElementById('progress-' + i);
+      if (!el) continue;
+      el.innerHTML = '';
+      for (let j = 1; j <= CHAPTER_COUNT; j++) {
+        const dot = document.createElement('div');
+        dot.className = 'progress-dot';
+        if ('page-' + j === currentId) dot.classList.add('current');
+        else if (visited.has('page-' + j)) dot.classList.add('done');
+        dot.onclick = () => goToPage('page-' + j);
+        dot.title = 'Chapter ' + j;
+        el.appendChild(dot);
+      }
+    }
+  }
+</script>
+</body>
+</html>
