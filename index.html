@@ -118,6 +118,10 @@
     .chapter-card.c3::before { background: linear-gradient(90deg, var(--accent2), var(--accent4)); }
     .chapter-card.c4::before { background: linear-gradient(90deg, var(--accent4), var(--accent1)); }
     .chapter-card.c5::before { background: linear-gradient(90deg, var(--accent1), var(--accent3)); }
+    .chapter-card.c6::before { background: linear-gradient(90deg, var(--accent1), var(--accent4)); }
+    .chapter-card.c7::before { background: linear-gradient(90deg, var(--accent2), var(--accent4)); }
+    .chapter-card.c8::before { background: linear-gradient(90deg, var(--accent2), var(--accent3)); }
+
 
     .chapter-card:hover {
       transform: translateY(-4px);
@@ -429,14 +433,32 @@
       <div class="card-desc">Protect your capital with proven risk management rules.</div>
     </div>
     <div class="chapter-card c4" onclick="goToPage('page-4')">
-      <div class="card-icon">🧠</div>
+      <div class="card-icon">🪜</div>
       <div class="card-num">Chapter 04</div>
+      <div class="card-title">Support and Resistance</div>
+      <div class="card-desc">Know key zones.</div>
+    </div>
+    <div class="chapter-card c5" onclick="goToPage('page-5')">
+      <div class="card-icon">🪃</div>
+      <div class="card-num">Chapter 05</div>
+      <div class="card-title">Reversal Patterns</div>
+      <div class="card-desc">See when price is about to turn around.</div>
+    </div>
+    <div class="chapter-card c6" onclick="goToPage('page-6')">
+      <div class="card-icon">🤓📝</div>
+      <div class="card-num">Chapter 06</div>
+      <div class="card-title">Strategies</div>
+      <div class="card-desc">Learn how to use indicators for accuracy on entries.</div>
+    </div>
+    <div class="chapter-card c7" onclick="goToPage('page-7')">
+      <div class="card-icon">🧠</div>
+      <div class="card-num">Chapter 07</div>
       <div class="card-title">Trading Psychology</div>
       <div class="card-desc">Control emotions, manage fear & greed, and trade with a clear mind.</div>
     </div>
-    <div class="chapter-card c5" onclick="goToPage('page-5')">
+    <div class="chapter-card c8" onclick="goToPage('page-8')">
       <div class="card-icon">⚡</div>
-      <div class="card-num">Chapter 05</div>
+      <div class="card-num">Chapter 08</div>
       <div class="card-title">Your First Trade</div>
       <div class="card-desc">A walkthrough of placing your first trade from start to finish.</div>
     </div>
@@ -493,10 +515,6 @@
       </div>
     </div>
 
-    <!---<p class="body-text">
-      Add more of your own text and images here. You can copy the <code class="key-term">.img-block</code>, <code class="key-term">.callout</code>, and <code class="key-term">.body-text</code> elements anywhere in this section.
-    </p>/!-->
-
     <p class="body-text">
       To start trading we need a broker. Many Jamaicans use Deriv as their chosen broker but some may use Exness or any other broker. It all depends on what/when you want to trade.
     </p>
@@ -548,18 +566,16 @@
       A <span class="key-term">green (bullish) candle</span> closes higher than it opened. A <span class="key-term">red (bearish) candle</span> closes lower. Learning to read these patterns quickly is a core skill every trader needs.
     </div>
 
-    <!--<p class="body-text">
-      Replace this text with your own content about chart patterns, indicators, moving averages, or anything else you want to cover in this chapter. You can add as many paragraphs, images, and callout boxes as you like.
-    </p> -->
+
     <h1>Timeframes</h1>
-    <p>A candlestick represent one period of time. Timeframes can range from ticks to a month.
+    <p class="body-text">A candlestick represent one period of time. Timeframes can range from ticks to a month.
       So one candle can represent price movement of a minute or a week or a month. </p>
-    <p>We use timeframes to analyze movement and spot our areas of <span class="key-term">support and resistance</span>, key entry levels, volatility and others.<br>The timeframe of your chart depends on the type of trader that you are.</p>
+    <p class="body-text">We use timeframes to analyze movement and spot our areas of <span class="key-term">support and resistance</span>, key entry levels, volatility and others.<br>The timeframe of your chart depends on the type of trader that you are.</p>
     
-    <p><span class="key-term">Scalpers</span>typically use the 1 to 5 minutes charts as they look for quick entries and exits.</p>
-    <p><span class="key-term">Day traders</span>typically use the 15 minutes to a hour charts. They hold positions for longer than a scalper and less that a swing trader. </p>
-    <p><span class="key-term">Swing traders</span>typically use the 4 hours to daily charts.</p>
-    <p><span class="key-term">Position traders</span>typically use the weekly to monthly charts as they hold their entries for a longer period.</p>
+    <p class="body-text"></pclass><span class="key-term">Scalpers</span>typically use the 1 to 5 minutes charts as they look for quick entries and exits.</p>
+    <p class="body-text"></p><span class="key-term">Day traders</span>typically use the 15 minutes to a hour charts. They hold positions for longer than a scalper and less that a swing trader. </p>
+    <p class="body-text"></pclass><span class="key-term">Swing traders</span>typically use the 4 hours to daily charts.</p>
+    <p class="body-text"></p><span class="key-term">Position traders</span>typically use the weekly to monthly charts as they hold their entries for a longer period.</p>
     
     <br>
 
@@ -661,7 +677,7 @@
       </div>
     </div>
   </div>
-        -->
+-->
 
         <div class="callout warn">
           <div class="callout-label">Whoops not ready yet</div>
@@ -674,26 +690,95 @@
     </button>
     <button class="nav-btn next" onclick="goToPage('page-4')">
       <span class="nav-label">Next <span class="nav-arrow">→</span></span>
-      <span class="nav-topic">Trading Psychology</span>
+      <span class="nav-topic">Support and Resistance</span>
     </button>
   </div>
 </div>
 
-<!-- ═══════════════════════════ CHAPTER 4 psychology═══════════════════════════ -->
+<!-- ═══════════════════════════ CHAPTER 4 support and resistance ═══════════════════════════ -->
 <div id="page-4" class="page inner-page">
   <div class="topbar">
     <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
     <div class="topbar-progress" id="progress-4"></div>
     <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
   </div>
-
   <!--
   <div class="content-wrap">
     <div class="chapter-label"><span class="dot"></span> Chapter 04</div>
-    <h1 class="content-title">Trading Psychology</h1>
+    <h1 class="content-title">Risk Management</h1>
+
+    
+    <p class="body-text">
+      Risk management is arguably the most important skill in trading. Even the best strategy will fail if you don't protect your capital. The golden rule: never risk more than you can afford to lose on a single trade.
+    </p>
+
+    <div class="img-block">
+      <div class="img-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <div>Add your risk management diagram or chart here</div>
+      </div>
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-label">⚠️ Rule #1</div>
+      Most professional traders risk no more than <strong style="color:var(--accent2)">1–2%</strong> of their total account on any single trade. This keeps losses manageable even during losing streaks.
+    </div>
 
     <p class="body-text">
-      The market is a battlefield of emotions. Fear causes traders to exit too early; greed causes them to hold too long. Developing the right mindset is just as important as any technical skill.
+      Add your own content here — stop losses, take profits, position sizing, risk/reward ratios, etc. Use the highlight cards below for quick reference points.
+    </p>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">🛑</div>
+        <div class="hl-title">Stop Loss</div>
+        <div class="hl-desc">An order that automatically closes your trade at a set loss level.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🎯</div>
+        <div class="hl-title">Take Profit</div>
+        <div class="hl-desc">An order that locks in gains when price hits your target.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">⚖️</div>
+        <div class="hl-title">Risk/Reward</div>
+        <div class="hl-desc">Compare potential loss to potential gain. Aim for at least 1:2.</div>
+      </div>
+    </div>
+  </div>
+-->
+
+        <div class="callout warn">
+          <div class="callout-label">Whoops not ready yet</div>
+        </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-3')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Risk Management</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-5')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Reversal Patterns</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 5 reversal patterns═══════════════════════════ -->
+<div id="page-5" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-5"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <!--
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 05</div>
+    <h1 class="content-title">Reversal Patterns</h1>
+
+    <p class="body-text">
+     
     </p>
 
     <div class="img-block">
@@ -736,22 +821,153 @@
       </div>
 
   <div class="nav-strip">
-    <button class="nav-btn prev" onclick="goToPage('page-3')">
+    <button class="nav-btn prev" onclick="goToPage('page-4')">
       <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
-      <span class="nav-topic">Risk Management</span>
+      <span class="nav-topic">Support and Resistance</span>
     </button>
-    <button class="nav-btn next" onclick="goToPage('page-5')">
+    <button class="nav-btn next" onclick="goToPage('page-6')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Strategies</span>
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ CHAPTER 6 strategy═══════════════════════════ -->
+<div id="page-6" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-6"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <!--
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 06</div>
+    <h1 class="content-title">Strategies</h1>
+
+    <p class="body-text">
+      The market is a battlefield of emotions. Fear causes traders to exit too early; greed causes them to hold too long. Developing the right mindset is just as important as any technical skill.
+    </p>
+
+    <div class="img-block">
+      <div class="img-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <div>Add your psychology diagram or image here</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">💡 Mindset Tip</div>
+      Keep a <span class="key-term">trading journal</span>. Writing down every trade — your reason for entering, your emotions, and the outcome — is one of the fastest ways to improve your decision-making.
+    </div>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">😱</div>
+        <div class="hl-title">Fear</div>
+        <div class="hl-desc">Leads to premature exits and missed opportunities.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🤑</div>
+        <div class="hl-title">Greed</div>
+        <div class="hl-desc">Leads to overtrading and holding losing positions too long.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🧘</div>
+        <div class="hl-title">Discipline</div>
+        <div class="hl-desc">Sticking to your plan no matter what the market throws at you.</div>
+      </div>
+    </div>
+  </div>
+      -->
+
+      <div class="callout warn">
+        <div class="callout-label">Whoops not ready yet</div>
+      </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-5')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Reversal Patterns</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-7')">
+      <span class="nav-label">Next <span class="nav-arrow">→</span></span>
+      <span class="nav-topic">Psychology</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════ CHAPTER 7 psychology═══════════════════════════ -->
+<div id="page-7" class="page inner-page">
+  <div class="topbar">
+    <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
+    <div class="topbar-progress" id="progress-7"></div>
+    <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
+  </div>
+
+  <!--
+  <div class="content-wrap">
+    <div class="chapter-label"><span class="dot"></span> Chapter 04</div>
+    <h1 class="content-title">Trading Psychology</h1>
+
+    <p class="body-text">
+      The market is a battlefield of emotions. Fear causes traders to exit too early; greed causes them to hold too long. Developing the right mindset is just as important as any technical skill.
+    </p>
+
+    <div class="img-block">
+      <div class="img-placeholder">
+        <div class="ph-icon">🖼️</div>
+        <div>Add your psychology diagram or image here</div>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-label">💡 Mindset Tip</div>
+      Keep a <span class="key-term">trading journal</span>. Writing down every trade — your reason for entering, your emotions, and the outcome — is one of the fastest ways to improve your decision-making.
+    </div>
+
+    <div class="highlight-cards">
+      <div class="hl-card">
+        <div class="hl-icon">😱</div>
+        <div class="hl-title">Fear</div>
+        <div class="hl-desc">Leads to premature exits and missed opportunities.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🤑</div>
+        <div class="hl-title">Greed</div>
+        <div class="hl-desc">Leads to overtrading and holding losing positions too long.</div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon">🧘</div>
+        <div class="hl-title">Discipline</div>
+        <div class="hl-desc">Sticking to your plan no matter what the market throws at you.</div>
+      </div>
+    </div>
+  </div>
+      -->
+
+      <div class="callout warn">
+        <div class="callout-label">Whoops not ready yet</div>
+      </div>
+
+  <div class="nav-strip">
+    <button class="nav-btn prev" onclick="goToPage('page-6')">
+      <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
+      <span class="nav-topic">Strategies</span>
+    </button>
+    <button class="nav-btn next" onclick="goToPage('page-8')">
       <span class="nav-label">Next <span class="nav-arrow">→</span></span>
       <span class="nav-topic">Your First Trade</span>
     </button>
   </div>
 </div>
 
-<!-- ═══════════════════════════ CHAPTER 5 get started═══════════════════════════ -->
-<div id="page-5" class="page inner-page">
+<!-- ═══════════════════════════ CHAPTER 8 get started═══════════════════════════ -->
+<div id="page-8" class="page inner-page">
   <div class="topbar">
     <div class="topbar-logo" onclick="goToPage('page-home')">📈 TradingGuide</div>
-    <div class="topbar-progress" id="progress-5"></div>
+    <div class="topbar-progress" id="progress-8"></div>
     <button class="topbar-home-btn" onclick="goToPage('page-home')">⌂ Home</button>
   </div>
 
@@ -810,7 +1026,7 @@
     </div>
 
   <div class="nav-strip">
-    <button class="nav-btn prev" onclick="goToPage('page-4')">
+    <button class="nav-btn prev" onclick="goToPage('page-7')">
       <span class="nav-label"><span class="nav-arrow">←</span> Previous</span>
       <span class="nav-topic">Trading Psychology</span>
     </button>
@@ -823,8 +1039,8 @@
 
 <!-- ═══════════════════════════ SCRIPT ═══════════════════════════ -->
 <script>
-  const PAGES = ['page-home', 'page-1', 'page-2', 'page-3', 'page-4', 'page-5'];
-  const CHAPTER_COUNT = 5;
+  const PAGES = ['page-home', 'page-1', 'page-2', 'page-3', 'page-4', 'page-5', 'page-6', 'page-7', 'page-8'];
+  const CHAPTER_COUNT = 8;
   let visited = new Set(['page-home']);
 
   function goToPage(id) {
